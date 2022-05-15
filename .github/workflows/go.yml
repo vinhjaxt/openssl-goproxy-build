@@ -1,0 +1,40 @@
+name: Go
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v3
+      with:
+        submodules: recursive
+    - name: Setup mingw64
+      run: |
+        apt update -y
+        apt install -y gcc-mingw-w64 gcc-multilib
+        
+    - name: Building openssl
+      run: |
+        cd openssl-source
+        ls -alvh
+        ./Configure --prefix=$PWD/dist --openssldir=/usr/lib/ssl enable-ssl2 enable-ssl3 no-shared mingw64
+        # ./Configure --prefix=$PWD/dist --openssldir=/usr/lib/ssl enable-ssl2 enable-ssl3 no-shared mingw64
+        make depend
+        make
+        make install
+        ls -alvh ./dist
+
+    - name: Set up Go
+      uses: actions/setup-go@v3
+      with:
+        go-version: 1.18
+
+    - name: Build
+      run: |
+        GOOS=windows GOARCH=amd64 CGO_ENABLED=1 CXX=x86_64-w64-mingw32-g++ CC=x86_64-w64-mingw32-gcc go build -v ./...
