@@ -26,6 +26,7 @@ jobs:
         make
         sudo make install
         ls -alvh ./dist
+        cd ..
 
     - name: Set up Go
       uses: actions/setup-go@v3
@@ -34,4 +35,8 @@ jobs:
 
     - name: Build
       run: |
+        cp -r ./openssl-source/dist/include/openssl /usr/x86_64-w64-mingw32/include/
+        cp -r ./openssl-source/dist/lib/* /usr/x86_64-w64-mingw32/lib/
+
+
         GOOS=windows GOARCH=amd64 CGO_ENABLED=1 CXX=x86_64-w64-mingw32-g++ CC=x86_64-w64-mingw32-gcc go build -v ./...
