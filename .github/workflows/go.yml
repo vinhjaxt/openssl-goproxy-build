@@ -24,7 +24,6 @@ jobs:
         # ./Configure --cross-compile-prefix=x86_64-w64-mingw32- --prefix=$(pwd)/dist --openssldir=/usr/lib/ssl enable-ssl2 enable-ssl3 no-shared mingw64
         make depend
         make
-        make check
         sudo make install
         ls -alvh ./dist
         cd ..
