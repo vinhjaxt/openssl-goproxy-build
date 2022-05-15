@@ -20,9 +20,11 @@ jobs:
         sudo apt update -y
         sudo apt install -y gcc-mingw-w64 gcc-multilib
         cd openssl-source
+        git branch
         ls -alvh
         ./Configure --prefix=$PWD/dist --openssldir=/usr/lib/ssl enable-ssl2 enable-ssl3 no-shared mingw64
         # ./Configure --prefix=$PWD/dist --openssldir=/usr/lib/ssl enable-ssl2 enable-ssl3 no-shared mingw64
+        cat Makefile
         make depend
         make
         make install
