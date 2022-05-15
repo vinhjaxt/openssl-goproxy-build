@@ -19,10 +19,9 @@ jobs:
       run: |
         sudo apt update -y
         sudo apt install -y gcc-mingw-w64 gcc-multilib
-        sudo find / -name '*tlhelp32*'
         cd openssl-source
-        ./Configure --prefix=$PWD/dist --openssldir=/usr/lib/ssl enable-ssl2 enable-ssl3 no-shared mingw64
-        # ./Configure --prefix=$PWD/dist --openssldir=/usr/lib/ssl enable-ssl2 enable-ssl3 no-shared mingw64
+        ./Configure --cross-compile-prefix=x86_64-w64-mingw32- --prefix=$PWD/dist --openssldir=/usr/lib/ssl enable-ssl2 enable-ssl3 no-shared mingw64
+        # ./Configure --cross-compile-prefix=x86_64-w64-mingw32- --prefix=$PWD/dist --openssldir=/usr/lib/ssl enable-ssl2 enable-ssl3 no-shared mingw64
         make depend
         make
         make install
