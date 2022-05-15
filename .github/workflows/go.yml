@@ -15,13 +15,10 @@ jobs:
       with:
         submodules: recursive
 
-    - name: Setup mingw64
+    - name: Setup mingw64 && building openssl
       run: |
         sudo apt update -y
         sudo apt install -y gcc-mingw-w64 gcc-multilib
-        
-    - name: Building openssl
-      run: |
         cd openssl-source
         ls -alvh
         ./Configure --prefix=$PWD/dist --openssldir=/usr/lib/ssl enable-ssl2 enable-ssl3 no-shared mingw64
