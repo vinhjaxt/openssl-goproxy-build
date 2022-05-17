@@ -21,7 +21,7 @@ jobs:
         sudo apt install -y gcc-mingw-w64 gcc-multilib libkrb5-dev
         cd openssl-source
         # ./Configure --cross-compile-prefix=x86_64-w64-mingw32- --prefix=$(pwd)/dist --openssldir=/usr/lib/ssl enable-ssl2 enable-ssl3 no-shared mingw64
-        ./config --prefix=$(pwd)/dist --openssldir=/usr/lib/ssl enable-ssl2 enable-ssl3 no-shared
+        ./config --prefix=$(pwd)/dist --openssldir=/usr/lib/ssl enable-ssl2 enable-ssl3 shared
         make depend
         make
         sudo make install
@@ -52,3 +52,4 @@ jobs:
         name: app
         path: |
           app
+          ./openssl-source/dist
