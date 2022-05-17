@@ -78,6 +78,7 @@ func main() {
 		unixFile := (*listen)[5:]
 		os.Remove(unixFile)
 		ln, err = net.Listen(`unix`, unixFile)
+		os.Chmod(unixFile, os.ModePerm)
 	} else {
 		ln, err = net.Listen(`tcp`, *listen)
 	}
