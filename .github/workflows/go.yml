@@ -38,7 +38,7 @@ jobs:
         # sudo cp -r ./openssl-source/dist/include/openssl /usr/x86_64-w64-mingw32/include/
         # sudo cp -r ./openssl-source/dist/lib/* /usr/x86_64-w64-mingw32/lib/
         sudo rm -rf /usr/include/x86_64-linux-gnu/openssl /usr/local/ssl/include/openssl
-        mkdir -p /usr/local/ssl/include /usr/local/ssl/lib
+        sudo mkdir -p /usr/local/ssl/include /usr/local/ssl/lib
         sudo cp -r ./openssl-source/dist/include/openssl /usr/include/x86_64-linux-gnu/openssl/
         sudo cp -r ./openssl-source/dist/lib/* /usr/lib/x86_64-linux-gnu/
         sudo cp -r ./openssl-source/dist/include/openssl /usr/local/ssl/include/
