@@ -45,3 +45,17 @@ jobs:
         sudo cp -r ./openssl-source/dist/lib/* /usr/local/ssl/lib/
         # CGO_LDFLAGS="-g -O2 -lwsock32" GOOS=windows GOARCH=amd64 CGO_ENABLED=1 CXX=x86_64-w64-mingw32-g++ CC=x86_64-w64-mingw32-gcc go build -v ./...
         CGO_LDFLAGS="-g -O2 -L /usr/local/ssl/lib/" GOOS=linux GOARCH=amd64 CGO_ENABLED=1 go build -v ./...
+
+# Create release
+    - name: Generate release tag
+      id: tag
+      run: |
+        echo "::set-output name=release_tag::ActionBuild_$(date +"%Y.%m.%d_%H-%M-%S")"
+    - name: Release
+      uses: softprops/action-gh-release@v1
+      with:
+        tag_name: ${{ steps.tag.outputs.release_tag }}
+        files: |
+          ./app
+# Done release
+
