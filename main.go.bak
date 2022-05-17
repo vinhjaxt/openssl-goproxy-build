@@ -20,7 +20,7 @@ var dialer = (&net.Dialer{
 var listen = flag.String(`listen`, `:8043`, `Listen address. Eg: :8443; unix:/tmp/proxy.sock`)
 var addr = flag.String(`addr`, `megadomain.vnn.vn:443`, `Remote address`)
 var sni = flag.String(`sni`, `megadomain.vnn.vn`, `TLS Hello SNI String`)
-var sslVer = openssl.SSLVersion(*flag.Int(`ver`, 0x02, `SSL Version. SSLv3 = 2; TLSv1 = 3; TLSv1.1 = 4; TLSv1.2 = 5; AnyVer = 6`))
+var sslVer = flag.Int(`ver`, 0x02, `SSL Version. SSLv3 = 2; TLSv1 = 3; TLSv1.1 = 4; TLSv1.2 = 5; AnyVer = 6`)
 var noVerify = flag.Bool(`k`, false, `Don't verify SNI`)
 
 func TlsDial() (net.Conn, error) {
@@ -28,7 +28,7 @@ func TlsDial() (net.Conn, error) {
 	if err != nil {
 		return nil, err
 	}
-	ctx, err := openssl.NewCtxWithVersion(sslVer)
+	ctx, err := openssl.NewCtxWithVersion(openssl.SSLVersion(*sslVer))
 	if err != nil {
 		conn.Close()
 		return nil, err
