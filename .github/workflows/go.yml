@@ -47,5 +47,5 @@ jobs:
       with:
         name: app
         path: |
-          app
+          ./app*
           ./openssl-source/dist
