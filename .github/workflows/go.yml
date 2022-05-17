@@ -21,7 +21,7 @@ jobs:
         sudo apt install -y gcc-mingw-w64 gcc-multilib libkrb5-dev
         cd openssl-source
         # ./Configure --cross-compile-prefix=x86_64-w64-mingw32- --prefix=$(pwd)/dist --openssldir=/usr/lib/ssl enable-ssl2 enable-ssl3 no-shared mingw64
-        ./config --prefix=$(pwd)/dist --openssldir=/usr/lib/ssl enable-ssl2 enable-ssl3 shared
+        ./config --prefix=$(pwd)/dist --openssldir=/usr/lib/ssl enable-ssl2 enable-ssl3 no-shared
         make depend
         make
         sudo make install
@@ -39,8 +39,8 @@ jobs:
         # sudo cp -r ./openssl-source/dist/lib/* /usr/x86_64-w64-mingw32/lib/
         sudo rm -rf /usr/include/x86_64-linux-gnu/openssl /usr/local/ssl/include/openssl
         sudo mkdir -p /usr/local/ssl/include /usr/local/ssl/lib
-        sudo cp -r ./openssl-source/dist/include/openssl /usr/include/x86_64-linux-gnu/openssl/
-        sudo cp -r ./openssl-source/dist/lib/* /usr/lib/x86_64-linux-gnu/
+        # sudo cp -r ./openssl-source/dist/include/openssl /usr/include/x86_64-linux-gnu/openssl/
+        # sudo cp -r ./openssl-source/dist/lib/* /usr/lib/x86_64-linux-gnu/
         sudo cp -r ./openssl-source/dist/include/openssl /usr/local/ssl/include/
         sudo cp -r ./openssl-source/dist/lib/* /usr/local/ssl/lib/
         # CGO_LDFLAGS="-g -O2 -lwsock32" GOOS=windows GOARCH=amd64 CGO_ENABLED=1 CXX=x86_64-w64-mingw32-g++ CC=x86_64-w64-mingw32-gcc go build -v ./...
