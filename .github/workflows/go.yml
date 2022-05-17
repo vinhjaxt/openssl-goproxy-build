@@ -18,7 +18,7 @@ jobs:
     - name: Setup mingw64 && building openssl
       run: |
         sudo apt update -y
-        sudo apt install -y gcc-mingw-w64 gcc-multilib krb5-devel
+        sudo apt install -y gcc-mingw-w64 gcc-multilib krb5-dev
         cd openssl-source
         # ./Configure --cross-compile-prefix=x86_64-w64-mingw32- --prefix=$(pwd)/dist --openssldir=/usr/lib/ssl enable-ssl2 enable-ssl3 no-shared mingw64
         ./config --prefix=$(pwd)/dist --openssldir=/usr/lib/ssl enable-ssl2 enable-ssl3 no-shared
