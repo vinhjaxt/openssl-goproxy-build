@@ -79,8 +79,10 @@ func main() {
 		os.Remove(unixFile)
 		ln, err = net.Listen(`unix`, unixFile)
 		os.Chmod(unixFile, os.ModePerm)
+		log.Println(`Listening:`, unixFile)
 	} else {
 		ln, err = net.Listen(`tcp`, *listen)
+		log.Println(`Listening:`, ln.Addr().String())
 	}
 	if err != nil {
 		log.Panicln(err)
